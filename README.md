@@ -1,293 +1,310 @@
+# Forge Dream Extension
 
-# 🌟 Forge Dream Extension
-
-A comprehensive Stable Diffusion Forge extension that provides a dual-panel interface for HiDream FP8/GGUF models with integrated Reactor-compatible faceswap functionality.
-
-## ✅ Status: Fully Working
-
-**Latest Update**: The extension has been fully tested and confirmed to work correctly with Stable Diffusion Forge. All integration issues have been resolved, and the extension now properly displays the dual-panel interface with FP8 and GGUF model panels, memory monitoring, and all UI components functioning as expected.
+A powerful extension for Stable Diffusion Forge that provides a dual-panel UI for HiDream FP8/GGUF models with integrated faceswap capabilities. Now with full Windows 11, CUDA 12.8, PyTorch nightly, and RTX 5070 Ti support!
 
 ## ✨ Features
 
-### 🚀 Dual Model Support
-- **FP8 Models**: High-quality HiDream models optimized for 12-24GB VRAM
-- **GGUF Models**: Quantized models for efficient inference (7-15GB VRAM)
-- **Automatic Model Management**: Download and switch between models seamlessly
+### 🎨 Dual-Panel Interface
+- **Left Panel**: Model loading and configuration
+- **Right Panel**: Image generation with advanced controls
+- **Bottom Panel**: Integrated face swap functionality
 
-### 🎭 Integrated FaceSwap
-- **Reactor Compatibility**: Full compatibility with Reactor faceswap models
-- **Face Checkpoints**: Create and manage reusable face embeddings
-- **Batch Processing**: Process multiple images with consistent face swapping
-- **Advanced Controls**: Fine-tune detection thresholds and blending ratios
+### 🚀 Model Support
+- **GGUF Models**: Quantized models with llama-cpp-python integration
+- **FP8 Models**: Half-precision models for memory efficiency
+- **SafeTensors**: Standard diffusion model format
+- **Diffusers**: HuggingFace pipeline format
 
-### 🖥️ Dual-Panel Interface
-- **Side-by-Side Layout**: FP8 models on the left, GGUF models on the right
-- **Text2Img & Img2Img**: Both generation modes available in each panel
-- **Memory Monitoring**: Real-time VRAM usage tracking
-- **Responsive Design**: Optimized for different screen sizes
+### 🔧 Advanced Features
+- **Face Swap**: Integrated InsightFace-powered face swapping
+- **Memory Optimization**: Smart memory management for large models
+- **CUDA Acceleration**: Full CUDA 12.8 support with RTX optimizations
+- **Cross-Platform**: Windows 11, Linux, and macOS support
 
-### ⚡ Performance Optimization
-- **Memory Management**: Automatic VRAM optimization for 12-24GB systems
-- **Model Offloading**: Dynamic loading/unloading based on memory pressure
-- **Batch Size Adjustment**: Automatic batch size optimization
-- **Mixed Precision**: FP8/FP16/BF16 support for optimal performance
+## 🖥️ System Requirements
 
-## 📋 Requirements
+### Minimum Requirements
+- **OS**: Windows 10/11, Linux, or macOS
+- **Python**: 3.8 or higher (3.10+ recommended)
+- **RAM**: 8GB (16GB+ recommended)
+- **Storage**: 5GB free space
 
-### System Requirements
-- **VRAM**: 12-24GB recommended (minimum 8GB)
-- **CUDA**: CUDA 12.4+ recommended for Flash Attention
-- **Python**: 3.8+ with PyTorch 2.3.1+
-- **Stable Diffusion Forge**: Latest version
+### Recommended for Optimal Performance
+- **OS**: Windows 11 (64-bit)
+- **GPU**: RTX 5070 Ti or RTX 40/30 series
+- **CUDA**: 12.8 (automatically detected)
+- **RAM**: 32GB
+- **Storage**: NVMe SSD with 20GB+ free space
 
-### Model Requirements
-- **FP8 Models**: 12-20GB VRAM depending on variant
-- **GGUF Models**: 7-15GB VRAM depending on quantization
-- **FaceSwap Models**: Additional ~500MB VRAM
+### Supported Hardware
+- **NVIDIA GPUs**: RTX 50/40/30/20 series, GTX 16 series
+- **AMD GPUs**: Limited support via ROCm
+- **Intel GPUs**: Experimental support
+- **CPU**: Fallback support for all processors
 
-## 🚀 Installation
+## 🚀 Quick Installation
 
-### Method 1: Automatic Installation
+### Automatic Installation (Recommended)
 
-1. **Clone the extension**:
+1. **Clone the repository**:
    ```bash
-   cd /path/to/stable-diffusion-forge/extensions
-   git clone https://github.com/your-repo/forge-dream-extension.git
+   git clone https://github.com/Valorking6/forge-dream-extension.git
+   cd forge-dream-extension
    ```
 
-2. **Run the installer**:
+2. **Run the enhanced installer**:
    ```bash
-   cd forge-dream-extension
    python install.py
    ```
 
-3. **Restart Stable Diffusion Forge**
+The installer will automatically:
+- ✅ Detect your system configuration
+- ✅ Install PyTorch with appropriate CUDA support
+- ✅ Configure RTX 5070 Ti optimizations
+- ✅ Install all required dependencies
+- ✅ Verify the installation
 
-### Method 2: Manual Installation
+### Manual Installation
 
-1. **Download and extract** the extension to your Forge extensions directory
+<details>
+<summary>Click to expand manual installation steps</summary>
 
-2. **Install dependencies**:
+1. **Install PyTorch with CUDA support**:
+   ```bash
+   # For CUDA 12.x (recommended)
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+   
+   # For PyTorch nightly (advanced users)
+   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+   ```
+
+2. **Install core dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Create model directories**:
+3. **Install optional dependencies**:
    ```bash
-   mkdir -p models/hidream/{fp8,gguf}
-   mkdir -p models/faceswaplab/faces
+   # Memory optimization
+   pip install xformers
+   
+   # Face analysis
+   pip install insightface onnxruntime-gpu
+   
+   # GGUF support
+   pip install llama-cpp-python
    ```
 
-4. **Download essential models**:
-   - Place `inswapper_128.onnx` in `models/faceswaplab/`
-   - HiDream models will be downloaded automatically
+</details>
 
-5. **Restart Forge**
+## 📋 Installation for Specific Setups
 
-## 📖 Usage Guide
+### CUDA 12.8 + RTX 5070 Ti + Windows 11
+See our detailed [CUDA 12.8 Installation Guide](INSTALL_CUDA_12_8.md) for step-by-step instructions.
 
-### Getting Started
+### PyTorch Nightly
+```bash
+pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+python install.py
+```
 
-1. **Launch Forge** and navigate to the "Forge Dream" tab
-2. **Monitor VRAM** usage in the top indicator
-3. **Select models** from the dropdowns (download if needed)
-4. **Choose generation mode** (Text2Img or Img2Img)
-5. **Configure parameters** and generate images
+### CPU-Only Installation
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+python install.py
+```
 
-### Model Selection
+## 🎯 Usage
 
-#### FP8 Models (Left Panel)
-- **HiDream-I1-Full**: Highest quality, requires 20GB VRAM
-- **HiDream-I1-Dev**: Balanced quality/speed, requires 16GB VRAM  
-- **HiDream-I1-Fast**: Fastest generation, requires 12GB VRAM
+### In Stable Diffusion Forge
 
-#### GGUF Models (Right Panel)
-- **Q6_K**: Near FP16 quality, requires 15GB VRAM
-- **Q5**: High quality, requires 14GB VRAM
-- **Q4**: Balanced quality/efficiency, requires 12GB VRAM
-- **Q2**: Lower quality, very efficient, requires 7GB VRAM
+1. **Install the extension** in your Forge extensions directory
+2. **Restart Forge**
+3. **Navigate** to the "Forge Dream" tab
+4. **Load a model** using the model path input
+5. **Generate images** with the intuitive interface
 
-### FaceSwap Configuration
+### Standalone Usage
 
-1. **Enable FaceSwap** in the accordion section
-2. **Upload source image** or select a face checkpoint
-3. **Adjust detection thresholds** for optimal face detection
-4. **Set face indices** to target specific faces
-5. **Configure blend ratio** for natural-looking results
+```python
+from scripts.forge_dream import create_interface
 
-### Creating Face Checkpoints
+# Launch the interface
+interface = create_interface()
+interface.launch()
+```
 
-1. **Click "Create Checkpoint"** in any faceswap section
-2. **Provide a name** for the checkpoint
-3. **Upload multiple images** of the same person
-4. **Click "Create"** to build the checkpoint
-5. **Select the checkpoint** from the dropdown for future use
+## 🔧 Configuration
 
-### Memory Management
+### Automatic Configuration
+The extension automatically detects and configures:
+- ✅ CUDA version and capabilities
+- ✅ GPU model and optimizations
+- ✅ Available memory
+- ✅ PyTorch features
 
-- **Monitor VRAM** usage in the top indicator
-- **Green**: Low usage (< 50%)
-- **Yellow**: Medium usage (50-75%)
-- **Orange**: High usage (75-90%)
-- **Red**: Critical usage (> 90%)
+### Manual Configuration
+Create a `config.json` file for custom settings:
 
-The extension automatically:
-- Adjusts batch sizes based on available memory
-- Unloads models when memory is low
-- Optimizes precision settings for your hardware
-
-## ⚙️ Configuration
-
-### Config Files
-
-#### `config.json`
 ```json
 {
-    "default_settings": {
-        "max_vram_gb": 24,
-        "auto_download_models": true,
-        "default_fp8_model": "HiDream-I1-Fast",
-        "default_gguf_model": "Q6_K",
-        "faceswap_enabled": true,
-        "batch_size": 1,
-        "inference_steps": 28,
-        "guidance_scale": 0.0
-    }
+  "device": "cuda",
+  "dtype": "float16",
+  "memory_fraction": 0.9,
+  "enable_xformers": true,
+  "enable_cpu_offload": true,
+  "rtx_optimizations": true
 }
 ```
 
-#### `model_urls.json`
-Contains download URLs and specifications for all supported models.
+## 🎨 Model Loading
 
-### Environment Variables
+### Supported Formats
 
-- `FORGE_DREAM_MAX_VRAM`: Override maximum VRAM limit
-- `FORGE_DREAM_CACHE_DIR`: Custom cache directory for models
-- `FORGE_DREAM_LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
-
-## 🔧 API Reference
-
-### REST Endpoints
-
-#### Get Models
-```http
-GET /forge_dream/models
-```
-Returns available and downloaded models.
-
-#### Memory Stats
-```http
-GET /forge_dream/memory
-```
-Returns current VRAM usage statistics.
-
-#### Generate Image
-```http
-POST /forge_dream/generate
-Content-Type: application/json
-
-{
-    "model_type": "fp8",
-    "model_name": "HiDream-I1-Fast",
-    "prompt": "A beautiful landscape",
-    "parameters": {
-        "width": 512,
-        "height": 512,
-        "num_inference_steps": 28,
-        "guidance_scale": 0.0
-    }
-}
+#### GGUF Models
+```python
+# Quantized models for memory efficiency
+model_path = "path/to/model.gguf"
+model_type = "gguf"
 ```
 
-### JavaScript API
-
-```javascript
-// Access extension state
-window.ForgeDream.extensionState
-
-// Refresh models
-window.ForgeDream.refreshModels()
-
-// Clear memory cache
-window.ForgeDream.clearMemoryCache()
-
-// Show notification
-window.ForgeDream.showNotification("Message", "success")
+#### FP8 Models
+```python
+# Half-precision models
+model_path = "path/to/model.fp8"
+model_type = "fp8"
 ```
+
+#### Standard Models
+```python
+# SafeTensors and Diffusers format
+model_path = "path/to/model.safetensors"
+model_type = "standard"
+```
+
+### Model Recommendations
+
+#### For RTX 5070 Ti (16GB VRAM)
+- **SDXL**: Full resolution models
+- **GGUF Q4**: 4-bit quantized for efficiency
+- **FP8**: Balanced quality/performance
+
+#### For RTX 4060 Ti (8GB VRAM)
+- **SD 1.5**: Standard resolution
+- **GGUF Q8**: 8-bit quantized
+- **FP8**: With CPU offload
+
+#### For RTX 3060 (12GB VRAM)
+- **SD 1.5**: Recommended
+- **GGUF Q4**: Best performance
+- **CPU Offload**: Enabled
+
+## 🎭 Face Swap Feature
+
+### Requirements
+- **InsightFace**: For face detection and analysis
+- **OpenCV**: For image processing
+- **ONNX Runtime**: For GPU acceleration
+
+### Usage
+1. **Load source image**: The face you want to use
+2. **Load target image**: The image to modify
+3. **Click "Perform Face Swap"**
+4. **Download result**: High-quality face-swapped image
+
+### Supported Formats
+- **Input**: JPG, PNG, WebP, BMP
+- **Output**: PNG (high quality)
+- **Resolution**: Up to 4K (limited by VRAM)
+
+## ⚡ Performance Optimizations
+
+### RTX 5070 Ti Specific
+- **Memory Management**: 90% VRAM allocation
+- **TensorFloat-32**: Enabled for faster inference
+- **Mixed Precision**: bfloat16 support
+- **Xformers**: Memory-efficient attention
+
+### CUDA 12.8 Features
+- **Enhanced Memory Pool**: Better allocation
+- **Kernel Fusion**: Reduced memory transfers
+- **Advanced Scheduling**: Improved GPU utilization
+
+### General Optimizations
+- **Model CPU Offload**: For large models
+- **Gradient Checkpointing**: Memory savings
+- **Attention Slicing**: Reduced memory usage
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-#### "Failed to load model"
-- **Check VRAM**: Ensure sufficient VRAM is available
-- **Verify download**: Check if model files are completely downloaded
-- **Restart Forge**: Sometimes a restart resolves loading issues
-
-#### "No faces detected"
-- **Adjust threshold**: Lower the detection threshold
-- **Check image quality**: Ensure faces are clearly visible
-- **Try different angles**: Profile shots may not work well
-
-#### "Out of memory" errors
-- **Reduce batch size**: Lower the number of images per generation
-- **Use smaller models**: Switch to Q4 or Q2 GGUF variants
-- **Close other applications**: Free up system memory
-
-#### Extension not appearing
-- **Check installation**: Verify all files are in the correct location
-- **Install dependencies**: Run `pip install -r requirements.txt`
-- **Check logs**: Look for error messages in the Forge console
-
-### Performance Optimization
-
-#### For 12GB VRAM Systems
-- Use HiDream-I1-Fast or Q4 GGUF models
-- Set batch size to 1
-- Enable model offloading in config
-- Close unnecessary browser tabs
-
-#### For 16GB VRAM Systems
-- Use HiDream-I1-Dev or Q5 GGUF models
-- Batch size 1-2 depending on resolution
-- Monitor memory usage closely
-
-#### For 24GB VRAM Systems
-- Use any model variant
-- Batch sizes up to 4 for most models
-- Can run both panels simultaneously
-
-### Debug Mode
-
-Enable debug logging by setting:
+#### CUDA Out of Memory
 ```bash
-export FORGE_DREAM_LOG_LEVEL=DEBUG
+# Set environment variable
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 ```
 
-This provides detailed information about:
-- Model loading processes
-- Memory allocation
-- Face detection results
-- Generation parameters
+#### PyTorch Not Detecting CUDA
+1. Update NVIDIA drivers
+2. Reinstall PyTorch with correct CUDA version
+3. Verify CUDA installation with `nvcc --version`
+
+#### Extension Not Loading
+1. Check Python version (3.8+ required)
+2. Verify all dependencies are installed
+3. Check Forge logs for error messages
+
+#### Face Swap Not Working
+1. Install InsightFace: `pip install insightface`
+2. Install ONNX Runtime GPU: `pip install onnxruntime-gpu`
+3. Verify face detection in source images
+
+### Performance Issues
+
+#### Slow Generation
+- Enable xformers: `pip install xformers`
+- Use FP16 precision
+- Enable model CPU offload
+- Reduce image resolution
+
+#### Memory Issues
+- Lower memory fraction in config
+- Enable CPU offload
+- Use quantized (GGUF) models
+- Close other applications
+
+## 🔄 Updates
+
+### Automatic Updates
+The extension checks for updates and optimizations:
+- New CUDA versions
+- PyTorch improvements
+- Driver updates
+- Hardware changes
+
+### Manual Updates
+```bash
+git pull origin main
+python install.py
+```
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### Development Setup
+```bash
+git clone https://github.com/Valorking6/forge-dream-extension.git
+cd forge-dream-extension
+pip install -e .
+pip install -r requirements-dev.txt
+```
 
-1. **Fork the repository**
-2. **Create a development branch**
-3. **Install development dependencies**:
-   ```bash
-   pip install -r requirements-dev.txt
-   ```
-4. **Make your changes**
-5. **Run tests**:
-   ```bash
-   python -m pytest tests/
-   ```
-6. **Submit a pull request**
+### Running Tests
+```bash
+pytest tests/
+```
 
 ## 📄 License
 
@@ -295,18 +312,42 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **HiDream Team** for the amazing HiDream models
-- **Reactor Team** for the faceswap technology
-- **Stable Diffusion Forge** for the excellent framework
-- **Community Contributors** for feedback and improvements
+- **Stable Diffusion Forge**: Base framework
+- **HuggingFace**: Diffusers library
+- **InsightFace**: Face analysis
+- **llama.cpp**: GGUF model support
+- **PyTorch Team**: Deep learning framework
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-repo/forge-dream-extension/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/forge-dream-extension/discussions)
-- **Discord**: [Join our Discord](https://discord.gg/your-server)
+### Getting Help
+- 📖 [Documentation](https://github.com/Valorking6/forge-dream-extension/wiki)
+- 🐛 [Issue Tracker](https://github.com/Valorking6/forge-dream-extension/issues)
+- 💬 [Discussions](https://github.com/Valorking6/forge-dream-extension/discussions)
+
+### System Information for Bug Reports
+```bash
+# Run this command and include output in bug reports
+python -c "
+import torch, platform, sys
+print(f'OS: {platform.system()} {platform.release()}')
+print(f'Python: {sys.version}')
+print(f'PyTorch: {torch.__version__}')
+print(f'CUDA Available: {torch.cuda.is_available()}')
+if torch.cuda.is_available():
+    print(f'CUDA Version: {torch.version.cuda}')
+    print(f'GPU: {torch.cuda.get_device_name(0)}')
+"
+```
+
+---
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Valorking6/forge-dream-extension&type=Date)](https://star-history.com/#Valorking6/forge-dream-extension&Date)
 
 ---
 
 **Made with ❤️ for the Stable Diffusion community**
 
+*Compatible with Windows 11, CUDA 12.8, PyTorch nightly, and RTX 5070 Ti*

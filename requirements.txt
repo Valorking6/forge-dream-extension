@@ -1,17 +1,55 @@
-diffusers>=0.32.2
-transformers>=4.48.3
-torch>=2.3.1
-torchvision>=0.18.1
-flash-attn>=2.5.0
-huggingface-hub>=0.26.2
-safetensors>=0.4.3
-accelerate>=1.3.0
-insightface==0.7.3
-onnxruntime>=1.16.0
-opencv-python>=4.8.0
+# Forge Dream Extension Requirements - CUDA 12.8 & Windows Compatible
+
+# Core dependencies
+torch>=2.1.0
+torchvision>=0.16.0
+torchaudio>=2.1.0
+
+# For torch nightly (optional, uncomment if using nightly builds)
+# --index-url https://download.pytorch.org/whl/nightly/cu121
+# torch>=2.5.0.dev
+# torchvision>=0.20.0.dev
+# torchaudio>=2.5.0.dev
+
+# Diffusion models
+diffusers>=0.24.0
+transformers>=4.35.0
+accelerate>=0.24.0
+safetensors>=0.4.0
+
+# Image processing
 Pillow>=10.0.0
-numpy>=1.24.0,<2.0.0
-scipy>=1.11.0
-scikit-image>=0.21.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# Face analysis (optional but recommended)
+insightface>=0.7.3
+onnxruntime-gpu>=1.16.0  # For CUDA acceleration
+
+# GGUF support (optional)
+llama-cpp-python>=0.2.0  # Will be compiled with CUDA support if available
+
+# Memory optimization
+xformers>=0.0.22  # For memory efficient attention
+
+# Gradio for UI
+gradio>=4.0.0
+
+# Utilities
 tqdm>=4.65.0
 requests>=2.31.0
+huggingface-hub>=0.17.0
+
+# Windows specific dependencies
+pywin32>=306; platform_system=="Windows"
+colorama>=0.4.6; platform_system=="Windows"
+
+# Development dependencies (optional)
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# CUDA 12.8 specific optimizations
+# These will be automatically used if available
+# nvidia-ml-py>=12.535.0
+# cupy-cuda12x>=12.0.0
