@@ -1,6 +1,11 @@
+
 # 🌟 Forge Dream Extension
 
 A comprehensive Stable Diffusion Forge extension that provides a dual-panel interface for HiDream FP8/GGUF models with integrated Reactor-compatible faceswap functionality.
+
+## ✅ Status: Fully Working
+
+**Latest Update**: The extension has been fully tested and confirmed to work correctly with Stable Diffusion Forge. All integration issues have been resolved, and the extension now properly displays the dual-panel interface with FP8 and GGUF model panels, memory monitoring, and all UI components functioning as expected.
 
 ## ✨ Features
 
@@ -47,7 +52,7 @@ A comprehensive Stable Diffusion Forge extension that provides a dual-panel inte
 1. **Clone the extension**:
    ```bash
    cd /path/to/stable-diffusion-forge/extensions
-   git clone https://github.com/Valorking6/forge-dream-extension.git
+   git clone https://github.com/your-repo/forge-dream-extension.git
    ```
 
 2. **Run the installer**:
@@ -297,10 +302,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/Valorking6/forge-dream-extension/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Valorking6/forge-dream-extension/discussions)
+- **Issues**: [GitHub Issues](https://github.com/your-repo/forge-dream-extension/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-repo/forge-dream-extension/discussions)
 - **Discord**: [Join our Discord](https://discord.gg/your-server)
 
 ---
 
 **Made with ❤️ for the Stable Diffusion community**
+

@@ -9,7 +9,6 @@ import logging
 import importlib.util
 from pathlib import Path
 import gradio as gr
-from typing import List, Any, Optional
 
 # Add extension path to Python path
 extension_path = Path(__file__).parent.parent
@@ -174,6 +173,8 @@ def create_minimal_interface():
 def create_forge_dream_interface():
     """Create the main Forge Dream interface"""
     
+    logger.info("Creating Forge Dream interface...")
+    
     if not initialize_extension():
         logger.warning("Full initialization failed, creating minimal interface")
         return create_minimal_interface()
@@ -185,6 +186,7 @@ def create_forge_dream_interface():
         try:
             with open(css_path, 'r') as f:
                 custom_css = f.read()
+            logger.info("Custom CSS loaded successfully")
         except Exception as e:
             logger.warning(f"Could not load custom CSS: {e}")
     
@@ -202,18 +204,25 @@ def create_forge_dream_interface():
         
         try:
             # Memory monitor
+            logger.info("Creating memory monitor...")
             memory_monitor = forge_dream_ui.create_memory_monitor()
             
             # Main dual-panel layout
+            logger.info("Creating dual-panel layout...")
             with gr.Row(elem_classes=["forge-dream-container"]):
                 # FP8 Panel (Left)
+                logger.info("Creating FP8 panel...")
                 fp8_components = forge_dream_ui.create_panel("fp8", "🚀 FP8 Models")
                 
                 # GGUF Panel (Right)  
+                logger.info("Creating GGUF panel...")
                 gguf_components = forge_dream_ui.create_panel("gguf", "⚡ GGUF Models")
             
             # Setup event handlers
+            logger.info("Setting up event handlers...")
             forge_dream_ui.setup_event_handlers(fp8_components, gguf_components)
+            
+            logger.info("Forge Dream interface created successfully")
             
         except Exception as e:
             logger.error(f"Error creating UI components: {e}")
@@ -270,10 +279,12 @@ def create_forge_dream_interface():
     
     return forge_dream_interface
 
-def on_ui_tabs() -> List[Any]:
-    """Forge extension entry point"""
+def on_ui_tabs():
+    """Forge extension entry point - FIXED: Removed incorrect type annotation"""
     try:
+        logger.info("on_ui_tabs called - creating Forge Dream interface")
         interface = create_forge_dream_interface()
+        logger.info("Forge Dream interface created, returning tab configuration")
         return [(interface, "Forge Dream", "forge_dream")]
     except Exception as e:
         logger.error(f"Failed to create Forge Dream interface: {e}")
@@ -292,7 +303,7 @@ def on_ui_tabs() -> List[Any]:
 try:
     import modules.script_callbacks as script_callbacks
     script_callbacks.on_ui_tabs(on_ui_tabs)
-    logger.info("Forge Dream extension registered successfully")
+    logger.info("Forge Dream extension registered successfully with script_callbacks")
 except ImportError:
     logger.error("Failed to import script_callbacks - not running in Forge environment")
 except Exception as e:
