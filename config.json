@@ -1,0 +1,25 @@
+{
+    "extension_name": "Forge Dream",
+    "version": "1.0.0",
+    "description": "Dual-panel UI for FP8/GGUF HiDream models with integrated faceswap",
+    "author": "Forge Dream Team",
+    "default_settings": {
+        "max_vram_gb": 24,
+        "auto_download_models": true,
+        "default_fp8_model": "HiDream-I1-Fast",
+        "default_gguf_model": "Q6_K",
+        "faceswap_enabled": true,
+        "face_detection_threshold": 0.5,
+        "face_similarity_threshold": 0.8,
+        "enable_face_restoration": true,
+        "batch_size": 1,
+        "inference_steps": 28,
+        "guidance_scale": 0.0
+    },
+    "model_directories": {
+        "fp8_models": "models/hidream/fp8",
+        "gguf_models": "models/hidream/gguf",
+        "faceswap_models": "models/faceswaplab",
+        "face_checkpoints": "models/faceswaplab/faces"
+    }
+}
