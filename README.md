@@ -1,185 +1,306 @@
 # 🌟 Forge Dream Extension
 
-**Dual-panel UI for HiDream FP8/GGUF models with integrated faceswap functionality for Stable Diffusion Forge**
+A comprehensive Stable Diffusion Forge extension that provides a dual-panel interface for HiDream FP8/GGUF models with integrated Reactor-compatible faceswap functionality.
 
-## 🚀 Features
+## ✨ Features
 
-- **Dual Model Support**: Run both FP8 and GGUF HiDream models side-by-side
-- **Memory Optimization**: Intelligent VRAM management for 12-24GB systems
-- **Face Swap Integration**: Reactor-compatible face swapping with checkpoint support
-- **Robust Error Handling**: Graceful fallbacks and comprehensive error management
-- **API Support**: RESTful API endpoints for external integration
+### 🚀 Dual Model Support
+- **FP8 Models**: High-quality HiDream models optimized for 12-24GB VRAM
+- **GGUF Models**: Quantized models for efficient inference (7-15GB VRAM)
+- **Automatic Model Management**: Download and switch between models seamlessly
 
-## 🔧 Recent Fixes (v1.0.0)
+### 🎭 Integrated FaceSwap
+- **Reactor Compatibility**: Full compatibility with Reactor faceswap models
+- **Face Checkpoints**: Create and manage reusable face embeddings
+- **Batch Processing**: Process multiple images with consistent face swapping
+- **Advanced Controls**: Fine-tune detection thresholds and blending ratios
 
-This version addresses critical compatibility issues with Stable Diffusion Forge:
+### 🖥️ Dual-Panel Interface
+- **Side-by-Side Layout**: FP8 models on the left, GGUF models on the right
+- **Text2Img & Img2Img**: Both generation modes available in each panel
+- **Memory Monitoring**: Real-time VRAM usage tracking
+- **Responsive Design**: Optimized for different screen sizes
 
-### ✅ Fixed Issues
+### ⚡ Performance Optimization
+- **Memory Management**: Automatic VRAM optimization for 12-24GB systems
+- **Model Offloading**: Dynamic loading/unloading based on memory pressure
+- **Batch Size Adjustment**: Automatic batch size optimization
+- **Mixed Precision**: FP8/FP16/BF16 support for optimal performance
 
-1. **Numpy Version Conflict**: 
-   - **Problem**: Extension was installing numpy 2.x which conflicts with Forge's requirements
-   - **Solution**: Constrained numpy to `>=1.24.0,<2.0.0` in requirements.txt
+## 📋 Requirements
 
-2. **Installation Script Robustness**:
-   - **Problem**: Installation would fail completely if any dependency had conflicts
-   - **Solution**: Added `--no-deps` installation strategy with selective core dependency installation
-   - **Improvement**: Better error handling and graceful degradation
+### System Requirements
+- **VRAM**: 12-24GB recommended (minimum 8GB)
+- **CUDA**: CUDA 12.4+ recommended for Flash Attention
+- **Python**: 3.8+ with PyTorch 2.3.1+
+- **Stable Diffusion Forge**: Latest version
 
-3. **Import Error Handling**:
-   - **Problem**: Extension would crash if any module failed to import during startup
-   - **Solution**: Implemented safe import system with fallback interfaces
-   - **Improvement**: Extension now shows minimal interface even if some components fail
+### Model Requirements
+- **FP8 Models**: 12-20GB VRAM depending on variant
+- **GGUF Models**: 7-15GB VRAM depending on quantization
+- **FaceSwap Models**: Additional ~500MB VRAM
 
-4. **Directory Creation Issues**:
-   - **Problem**: Extension failed if config.json was missing or corrupted
-   - **Solution**: Added fallback directory creation with sensible defaults
-   - **Improvement**: More robust file system handling
+## 🚀 Installation
 
-5. **Forge Integration**:
-   - **Problem**: Extension registration could fail silently
-   - **Solution**: Enhanced error logging and graceful fallback registration
-   - **Improvement**: Better compatibility with Forge's module system
+### Method 1: Automatic Installation
 
-## 📦 Installation
-
-### Method 1: Git Clone (Recommended)
-
-1. Navigate to your Forge extensions directory:
+1. **Clone the extension**:
    ```bash
-   cd /path/to/stable-diffusion-webui-forge/extensions/
-   ```
-
-2. Clone the repository:
-   ```bash
+   cd /path/to/stable-diffusion-forge/extensions
    git clone https://github.com/Valorking6/forge-dream-extension.git
    ```
 
-3. Restart Stable Diffusion Forge
+2. **Run the installer**:
+   ```bash
+   cd forge-dream-extension
+   python install.py
+   ```
 
-### Method 2: Manual Download
+3. **Restart Stable Diffusion Forge**
 
-1. Download the repository as ZIP
-2. Extract to `stable-diffusion-webui-forge/extensions/forge-dream-extension/`
-3. Restart Stable Diffusion Forge
+### Method 2: Manual Installation
 
-## 🔧 System Requirements
+1. **Download and extract** the extension to your Forge extensions directory
 
-### Minimum Requirements
-- **VRAM**: 12GB (for Fast FP8 models or Q2 GGUF)
-- **RAM**: 16GB system RAM
-- **Storage**: 50GB free space for models
-- **Python**: 3.10+ (included with Forge)
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Recommended Requirements
-- **VRAM**: 24GB (for Full FP8 models or Q6_K GGUF)
-- **RAM**: 32GB system RAM
-- **Storage**: 100GB+ free space
-- **CUDA**: Compatible GPU (RTX 3090, 4090, A6000, etc.)
+3. **Create model directories**:
+   ```bash
+   mkdir -p models/hidream/{fp8,gguf}
+   mkdir -p models/faceswaplab/faces
+   ```
 
-## 🎯 Model Support
+4. **Download essential models**:
+   - Place `inswapper_128.onnx` in `models/faceswaplab/`
+   - HiDream models will be downloaded automatically
 
-### FP8 Models
-- **HiDream-I1-Full**: 20GB VRAM, highest quality
-- **HiDream-I1-Dev**: 16GB VRAM, development version
-- **HiDream-I1-Fast**: 12GB VRAM, optimized for speed
+5. **Restart Forge**
 
-### GGUF Models
-- **Q2_K**: 7GB VRAM, lower quality but very fast
-- **Q4_K_M**: 12GB VRAM, balanced quality/speed
-- **Q5_K_M**: 14GB VRAM, high quality
-- **Q6_K**: 15GB VRAM, near FP16 quality
+## 📖 Usage Guide
 
-### Face Swap Models
-- **InSwapper**: Primary face swapping model (auto-downloaded)
+### Getting Started
 
-## 🚀 Usage
+1. **Launch Forge** and navigate to the "Forge Dream" tab
+2. **Monitor VRAM** usage in the top indicator
+3. **Select models** from the dropdowns (download if needed)
+4. **Choose generation mode** (Text2Img or Img2Img)
+5. **Configure parameters** and generate images
 
-1. **Start Forge**: Launch Stable Diffusion Forge normally
-2. **Navigate to Extension**: Look for "Forge Dream" tab in the interface
-3. **Download Models**: Use the model download buttons for your preferred models
-4. **Generate Images**: Use either FP8 or GGUF panels for generation
-5. **Enable Face Swap**: Toggle face swap for character consistency
+### Model Selection
 
-## 🛠️ Troubleshooting
+#### FP8 Models (Left Panel)
+- **HiDream-I1-Full**: Highest quality, requires 20GB VRAM
+- **HiDream-I1-Dev**: Balanced quality/speed, requires 16GB VRAM  
+- **HiDream-I1-Fast**: Fastest generation, requires 12GB VRAM
 
-### Extension Not Loading
-1. Check console for error messages
-2. Ensure all dependencies are installed correctly
-3. Verify Python version compatibility (3.10+)
-4. Restart Forge completely
+#### GGUF Models (Right Panel)
+- **Q6_K**: Near FP16 quality, requires 15GB VRAM
+- **Q5**: High quality, requires 14GB VRAM
+- **Q4**: Balanced quality/efficiency, requires 12GB VRAM
+- **Q2**: Lower quality, very efficient, requires 7GB VRAM
 
-### Memory Issues
-1. Monitor VRAM usage in the extension interface
-2. Use smaller models (Fast FP8 or Q2 GGUF) for 12GB systems
-3. Close other applications using GPU memory
-4. Use the "Clear VRAM Cache" button
+### FaceSwap Configuration
 
-### Model Download Failures
-1. Check internet connection
-2. Verify sufficient disk space
-3. Try downloading models manually if needed
-4. Check Hugging Face access (some models may require authentication)
+1. **Enable FaceSwap** in the accordion section
+2. **Upload source image** or select a face checkpoint
+3. **Adjust detection thresholds** for optimal face detection
+4. **Set face indices** to target specific faces
+5. **Configure blend ratio** for natural-looking results
 
-### Import Errors
-The extension now handles import errors gracefully:
-- Missing dependencies will show warnings but won't crash the extension
-- A minimal interface will be shown if full initialization fails
-- Check console logs for specific missing packages
+### Creating Face Checkpoints
 
-## 🔧 Configuration
+1. **Click "Create Checkpoint"** in any faceswap section
+2. **Provide a name** for the checkpoint
+3. **Upload multiple images** of the same person
+4. **Click "Create"** to build the checkpoint
+5. **Select the checkpoint** from the dropdown for future use
 
-Edit `config.json` to customize:
+### Memory Management
 
+- **Monitor VRAM** usage in the top indicator
+- **Green**: Low usage (< 50%)
+- **Yellow**: Medium usage (50-75%)
+- **Orange**: High usage (75-90%)
+- **Red**: Critical usage (> 90%)
+
+The extension automatically:
+- Adjusts batch sizes based on available memory
+- Unloads models when memory is low
+- Optimizes precision settings for your hardware
+
+## ⚙️ Configuration
+
+### Config Files
+
+#### `config.json`
 ```json
 {
     "default_settings": {
         "max_vram_gb": 24,
+        "auto_download_models": true,
         "default_fp8_model": "HiDream-I1-Fast",
         "default_gguf_model": "Q6_K",
-        "faceswap_enabled": true
+        "faceswap_enabled": true,
+        "batch_size": 1,
+        "inference_steps": 28,
+        "guidance_scale": 0.0
     }
 }
 ```
 
-## 📚 API Documentation
+#### `model_urls.json`
+Contains download URLs and specifications for all supported models.
 
-The extension provides REST API endpoints:
+### Environment Variables
 
-- `GET /forge_dream/models` - List available and downloaded models
-- `GET /forge_dream/memory` - Get memory statistics
-- `POST /forge_dream/generate` - Generate images via API
+- `FORGE_DREAM_MAX_VRAM`: Override maximum VRAM limit
+- `FORGE_DREAM_CACHE_DIR`: Custom cache directory for models
+- `FORGE_DREAM_LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
+
+## 🔧 API Reference
+
+### REST Endpoints
+
+#### Get Models
+```http
+GET /forge_dream/models
+```
+Returns available and downloaded models.
+
+#### Memory Stats
+```http
+GET /forge_dream/memory
+```
+Returns current VRAM usage statistics.
+
+#### Generate Image
+```http
+POST /forge_dream/generate
+Content-Type: application/json
+
+{
+    "model_type": "fp8",
+    "model_name": "HiDream-I1-Fast",
+    "prompt": "A beautiful landscape",
+    "parameters": {
+        "width": 512,
+        "height": 512,
+        "num_inference_steps": 28,
+        "guidance_scale": 0.0
+    }
+}
+```
+
+### JavaScript API
+
+```javascript
+// Access extension state
+window.ForgeDream.extensionState
+
+// Refresh models
+window.ForgeDream.refreshModels()
+
+// Clear memory cache
+window.ForgeDream.clearMemoryCache()
+
+// Show notification
+window.ForgeDream.showNotification("Message", "success")
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### "Failed to load model"
+- **Check VRAM**: Ensure sufficient VRAM is available
+- **Verify download**: Check if model files are completely downloaded
+- **Restart Forge**: Sometimes a restart resolves loading issues
+
+#### "No faces detected"
+- **Adjust threshold**: Lower the detection threshold
+- **Check image quality**: Ensure faces are clearly visible
+- **Try different angles**: Profile shots may not work well
+
+#### "Out of memory" errors
+- **Reduce batch size**: Lower the number of images per generation
+- **Use smaller models**: Switch to Q4 or Q2 GGUF variants
+- **Close other applications**: Free up system memory
+
+#### Extension not appearing
+- **Check installation**: Verify all files are in the correct location
+- **Install dependencies**: Run `pip install -r requirements.txt`
+- **Check logs**: Look for error messages in the Forge console
+
+### Performance Optimization
+
+#### For 12GB VRAM Systems
+- Use HiDream-I1-Fast or Q4 GGUF models
+- Set batch size to 1
+- Enable model offloading in config
+- Close unnecessary browser tabs
+
+#### For 16GB VRAM Systems
+- Use HiDream-I1-Dev or Q5 GGUF models
+- Batch size 1-2 depending on resolution
+- Monitor memory usage closely
+
+#### For 24GB VRAM Systems
+- Use any model variant
+- Batch sizes up to 4 for most models
+- Can run both panels simultaneously
+
+### Debug Mode
+
+Enable debug logging by setting:
+```bash
+export FORGE_DREAM_LOG_LEVEL=DEBUG
+```
+
+This provides detailed information about:
+- Model loading processes
+- Memory allocation
+- Face detection results
+- Generation parameters
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly with Forge
-5. Submit a pull request
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
+1. **Fork the repository**
+2. **Create a development branch**
+3. **Install development dependencies**:
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+4. **Make your changes**
+5. **Run tests**:
+   ```bash
+   python -m pytest tests/
+   ```
+6. **Submit a pull request**
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- HiDream AI team for the amazing models
-- Stable Diffusion Forge developers
-- Face swap model creators
-- Community contributors and testers
+- **HiDream Team** for the amazing HiDream models
+- **Reactor Team** for the faceswap technology
+- **Stable Diffusion Forge** for the excellent framework
+- **Community Contributors** for feedback and improvements
 
 ## 📞 Support
 
-If you encounter issues:
-
-1. Check this README's troubleshooting section
-2. Look at console logs for specific errors
-3. Create an issue on GitHub with:
-   - Your system specifications
-   - Forge version
-   - Complete error logs
-   - Steps to reproduce
+- **Issues**: [GitHub Issues](https://github.com/Valorking6/forge-dream-extension/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Valorking6/forge-dream-extension/discussions)
+- **Discord**: [Join our Discord](https://discord.gg/your-server)
 
 ---
 
-**Note**: This extension is designed specifically for Stable Diffusion Forge. It may not work with other Stable Diffusion implementations without modifications.
+**Made with ❤️ for the Stable Diffusion community**
